@@ -23,18 +23,18 @@
           <label for="nombreMateriaInput">Nombre Materia</label>
           <div class="container">
             <select class="form-select" required >
-              <option value="opcion1"  required>aqui van los datos de la BD</option>
+              <option *ngFor="let item of inspectionList" [value]="item.subjectName">{{ item.subjectName }}</option>
             </select>
           </div>
         </div>
         <div>
           La fecha actual es: {{ fechaActual}}
         </div>
-          
+
           <div>
             <button type="submit" class="btn btn-success mx-3">Inscribir</button>
           </div>
-         
+
       </form>
     </div>
 </div>
