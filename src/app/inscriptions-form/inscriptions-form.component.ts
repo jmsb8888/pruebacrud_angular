@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
+import {SubjectsApiService} from "../subjects-api-.service";
 
 @Component({
   selector: 'app-inscriptions-form',
@@ -8,14 +9,19 @@ import {Observable} from "rxjs";
 })
 export class InscriptionsFormComponents implements OnInit{
   inspectionList$!:Observable<any[]>;
-  inspectionTypesList:any=[];
+  inspectionList: any[]=[];
   fechaActual: string;
 
-  constructor() {
+  constructor(private service:SubjectsApiService) {
     const fecha = new Date();
     this.fechaActual = fecha.toLocaleDateString();
   }
 
+
   ngOnInit(): void {
+    this.inspectionList$ = this.service.getInspectionList();
+    this.inspectionList$.subscribe((inspectionList) => {
+      this.inspectionList = inspectionList;
+    });
   }
 }
